@@ -1,7 +1,7 @@
 <?php
 class AnaServer {
-
-    	private $language	= 'en';
+	
+        private $language   = 'en';
 	public  $results    = array();
 	private $allowed    = "/[^a-z0-9]/i";
 	
