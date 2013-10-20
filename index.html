@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Codijuana - Implementing an anagram server </title>
+<style>#result1, #result2{padding:0px 5px 5px 5px; background-color:#FF9900; margin-top: 5px;}
+#moreinfo{padding: 0px 5px 5px 5px; background-color:#C0C0C0 ; border-radius:5px;margin-top:10px;}
+</style>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script>
+	<!-- using GET method -->
+	function trial(str){if (str==""){document.getElementById("result1").innerHTML="";return;}
+	if (window.XMLHttpRequest) { xmlhttp=new XMLHttpRequest();} else{ xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");} 
+	xmlhttp.onreadystatechange=function(){if (xmlhttp.readyState==4 && xmlhttp.status==200){document.getElementById("result1").innerHTML=xmlhttp.responseText;}}
+	xmlhttp.open("GET","client.php?q="+str,true);xmlhttp.send();}
+</script>
+<script>
+	<!-- using POST method -->
+	$('.try').live("click",function() {var dico = $("#dico").val();var act = $("#act").val();var tmp = $("#data").val();var data = tmp.trim();var dataString = 'name='+ data + '&action='+act+'&dico='+dico ;
+	if(data.length>0){$.ajax({type: "POST",url: "client.php",data: dataString,cache: false,success: function(html){$("#result2").append(html);}});}
+	return false;});		
+</script>
+</head>
+<body>
+<div><a href="./"><b>Clear the results</b></a> | <a href=""><b>Read the related article</b></a></div>
+<div id="trial1">
+	<h3>Trial 1: Using the built-in dictionnary</h3>
+	<div>Please choose a subject</div>
+	<div>
+		<select name="name" onchange="trial(this.value)">
+		   <option value="I'm main entrance into Dwarven hall; no enemy or minion, human or hobbit, can enter. Thing in pool, I hear in air. Die.
+">I'm main entrance into Dwarven hall; no enemy or minion, human or hobbit, can enter. Thing in pool, I hear in air. Die.
+</option>
+		   <option value="Tuesday, November Third">Tuesday, November Third </option>
+		   <option value="William Shakespeare">William Shakespeare</option>
+		   <option value="A masquerade can cover a sense of what is real to deceive us; to be unjaded and not lost, we must, then, determine truth.">A masquerade can cover a sense of what is real to deceive us; to be unjaded and not lost, we must, then, determine truth.</option>
+		   <option value="Chibua Seniores">Chibua Seniores</option>
+		   <option value="In the land of Mordor, where the shadows lie,One Ring to rule them all,One Ring to find them,One Ring to bring them all,And in the darkness, bind them.">In the land of Mordor, where the shadows lie,One Ring to rule them all,One Ring to find them,One Ring to bring them all,And in the darkness, bind them.</option>
+		   <option value="Tom Cruise">Tom Cruise</option>
+		   <option value="Motion picture 'From Russia with love'">Motion picture 'From Russia with love'</option>
+		   <option value="The Silence of the Lambs">The Silence of the Lambs</option>
+		   <option value="Anagrams Never Lie...">Anagrams Never Lie...</option>
+	   </select>
+	</div>
+	<div id="result1"></div>
+</div>
+-----------------------------------------------
+<div id="trial2">
+	<h3>Trial 2: Customizing the dictionnary</h3>
+	<form action='' method='post'>
+		word/name/expression/phrase(max length = 100): <input type="text" maxlength="100" name="txt" id="data" value=""> <br>
+		action: <select name="action" id="act"><option value="search">search</option><option value="add">add to the dictionary</option></select>
+		language: <select name="dictionnary" id="dico"><option value="fr">french</option><option value="en">english</option></select>
+		<input type='submit' value='submit' class='try'>
+	</form>
+	<div id="result2"></div>
+</div>
+<div id="moreinfo">
+<p>
+For a richer dictionnary, please consult 
+the internet anagram server: <a href="http://www.wordsmith.org/anagram/hof.html" target="_blank">http://www.wordsmith.org/anagram/hof.html</a>
+</p>
+</div>
+</body>
+</html>
