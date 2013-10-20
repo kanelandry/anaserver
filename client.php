@@ -14,7 +14,7 @@
 		$matchs = $en_matcher->__($word);display($matchs);
 		echo "<br><strong>French</strong><br>";
 		$matchs = $fr_matcher->__($word);display($matchs);
-	}
+    }
     
     //-trial 2
     $valid = "/^[0-9A-Za-z ,.'-]+$/i";
@@ -27,11 +27,11 @@
 		  display($matchs);
 		}
 		else { 
-		    $dictionnary = 'data_'.$d.'.txt';
-		    $dico_words = file($dictionnary);
+		    $dictionary = 'data_'.$d.'.txt';
+		    $dico_words = file($dictionary);
 		    if(!in_array($word, $dico_words)){
 				$word = "\n".$word;
-				$fh = fopen($dictionnary, 'a') or die();
+				$fh = fopen($dictionary, 'a') or die();
 				if(fwrite($fh, $word)) echo "<br>Done! Thanks for your contribution"; else die("bad!");
 				fclose($fh);
 			}
