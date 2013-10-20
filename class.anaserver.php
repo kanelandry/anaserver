@@ -1,7 +1,7 @@
 <?php
 class AnaServer {
 
-    private $language	= 'en';
+    	private $language	= 'en';
 	public  $results    = array();
 	private $allowed    = "/[^a-z0-9]/i";
 	
@@ -12,10 +12,9 @@ class AnaServer {
 	public function find($str, $lin){
 		$regex = $this->regExp($str);
 		$tmp = strtolower(preg_replace($this->allowed,"",trim($lin)));
-        //echo $str." = ".$tmp;
-	    if (preg_match($regex, $tmp) && (strlen($str) == strlen($tmp)))
+		if (preg_match($regex, $tmp) && (strlen($str) == strlen($tmp)))
 		{ array_push($this->results,array(0=>$lin,1=>levenshtein($str, $tmp)));}
-    }
+        }
     
 	public function __($str) {	
 		try{
@@ -32,15 +31,15 @@ class AnaServer {
 		}
 		catch(Exception $e){
 	        return array(0 => "Couldn't read the dictionary");
-	    }
-   }
-    
-   private static function regExp($string){
-	  $regchars = preg_split('//',$string, -1, PREG_SPLIT_NO_EMPTY); 
-	  $regex = "/";
-	  foreach($regchars as $char) $regex .= "(?=.*".$char.")";
-	   return $regex."/";
-   }
-
+	       }
+	 }
+	    
+	 private static function regExp($string){
+		$regchars = preg_split('//',$string, -1, PREG_SPLIT_NO_EMPTY); 
+		$regex = "/";
+		foreach($regchars as $char) $regex .= "(?=.*".$char.")";
+		return $regex."/";
+	 }
+	
 }
 ?>
